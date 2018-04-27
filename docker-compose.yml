@@ -15,5 +15,5 @@ services:
           - /etc/localtime:/etc/localtime
         privileged: true
         entrypoint: /entrypoint.sh
-        working_dir: /home/user
+        working_dir: /Users/$USERNAME
 
