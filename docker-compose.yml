@@ -1,0 +1,19 @@
+#docker run -it -v ~/.bashrc.new:/home/bashit/.bashrc:rw  -v /Users:/Users -v ~/.bash_history:/root/.bash_history -v ~/.bashit:/root/.bash_it --privileged --rm rommelag/dind-docker-machine-compose sh
+
+version: '3'
+services:
+      dsh:
+        build: dsh
+        volumes:
+          - ./data/user:/home/user/
+          - /Users:/Users
+          - /var/run/docker.sock:/var/run/docker.sock
+          - ./data/entrypoint.sh:/entrypoint.sh
+          - ~/.ssh:/home/user/.ssh
+          - ~:/home/user/data
+          - ~/.docker:/home/user/.docker
+          - /etc/localtime:/etc/localtime
+        privileged: true
+        entrypoint: /entrypoint.sh
+        working_dir: /home/user
+
