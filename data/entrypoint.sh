@@ -29,6 +29,10 @@ test -f /home/user/.lanixx && ( echo "..."
 
 chmod 666 /var/run/docker.sock
 
-echo "su -c \"test -f ~/.bash_it/install.sh || ( git clone --depth=1 https://github.com/Bash-it/bash-it.git ~/.bash_it && ~/.bash_it/install.sh ) \" user" > ~/.bashrc
+test -f /home/user/.bash_it/install.sh || ( git clone --depth=1 https://github.com/Bash-it/bash-it.git /home/user/.bash_it )
+chown -R user:user /home/user/.bash_it
+
+sudo su -c "test -f /home/user/.bash_it/install.sh && /home/user/.bash_it/install.sh -s" user
+sudo su -c "eval $(ssh-agent) && ssh-add -K ~/.ssh/id_rsa" user
 
 while sleep 3600; do :; done
