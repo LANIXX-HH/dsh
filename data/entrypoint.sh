@@ -33,6 +33,6 @@ test -f /home/user/.bash_it/install.sh || ( git clone --depth=1 https://github.c
 chown -R user:user /home/user/.bash_it
 
 sudo su -c "test -f /home/user/.bash_it/install.sh && /home/user/.bash_it/install.sh -s" user
-sudo su -c "eval $(ssh-agent) && ssh-add ~/.ssh/id_rsa" user
+test "$(grep ssh-add /home/user/.bashrc)" = "" && echo "eval \$(ssh-agent) && ssh-add /home/user/.ssh/id_rsa" >> /home/user/.bashrc
 
 while sleep 3600; do :; done
